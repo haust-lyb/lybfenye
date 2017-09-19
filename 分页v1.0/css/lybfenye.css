@@ -1,0 +1,13 @@
+.clear {
+    clear: both;
+}
+
+.lybpagemode {
+    /*上一页的容器按钮容器下一页容器*/
+    margin: 1px;
+    float: left;
+}
+
+.pagenum {
+    margin: 1px;
+}

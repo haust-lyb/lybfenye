@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>分页模块化</title>
+
+    <!-- Bootstrap的样式css -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--引入分页用的css-->
+    <link rel="stylesheet" href="css/lybfenye.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">分页模块化（基于js和ajax）</h1>
+
+        <hr>
+        <h1 class="text-success bg-info">基本样式（效果图）</h1>
+
+        <img src="imgs/lybfenye_effect.png" alt="效果图" style="box-shadow:1px 1px 5px gray;" title="效果图片">
+
+        <hr>
+        <h1 class="text-success bg-info">自定义容器（充当自动生成分页的容器）</h1>
+
+
+
+        <!--使用方法如下，首先定义一个容器，为该容器取一个唯一标识，下面的js将会用此标识唯一定位此容器-->
+        <div class="mytest">
+
+        </div>
+
+
+        <!-- 然后引入jquery -->
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <!--引入分页js-->
+        <script src="js/lybfenye.js"></script>
+        <!-- 写js -->
+        <script>
+            $(function() { //页面加载完毕执行了如下代码
+                var testobj = { //定义一个testobj（名字可以自定义）对象
+                    nowpage: 3, //当前页
+                    allpage: 20, //总页数
+                    rongqiclass: ".mytest" //容器,写选择器，写成id选择器也可以
+                }
+
+                lybpage(testobj); //调用lybpage函数传入刚才的testobj（名字可以自定义）对象
+
+                /*delegate()函数用来动态绑定点击事件，之所以用delegate是因为传统的click()函数对动态生成的按钮不起效果，而delegate可以对未来元素（比如脚本生成的元素）起到同样效果*/
+
+                /*为脚本生成的标签绑定click事件的一个示例，为.lybdown元素（下一页）绑定点击事件*/
+                $(testobj.rongqiclass).delegate('.lybdown', 'click', function() { //ajax请求后台解析数据（自己加）请求完毕数据修改全局变量testobj的nowpage然后调用lybpage(testobj) 重新加载分页按钮即可
+                    alert("下一页");
+                })
+
+                /*为.lybup元素（上一页）绑定点击事件*/
+                $(testobj.rongqiclass).delegate('.lybup', 'click', function() { //ajax请求后台解析数据（自己加）请求完毕数据修改全局变量testobj的nowpage然后调用lybpage(testobj) 重新加载分页按钮即可
+                    alert("上一页");
+                })
+                /*为所有.pagenum元素（带有数字的跳页小按钮）绑定点击事件*/
+                $(testobj.rongqiclass).delegate('.pagenum', 'click', function() { //ajax请求后台解析数据（自己加）请求完毕数据修改全局变量testobj的nowpage然后调用lybpage(testobj) 重新加载分页按钮即可
+                    alert("到第" + $(this).html() + "页");
+                })
+
+                ;
+
+            })
+
+        </script>
+    </div>
+</body>
+
+</html>

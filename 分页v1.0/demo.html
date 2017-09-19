@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>分页模块化</title>
+
+    <!-- Bootstrap的样式css -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--引入分页用的css-->
+    <link rel="stylesheet" href="css/lybfenye.css">
+
+</head>
+
+<body>
+    <div class="container">
+
+
+
+
+        <!--使用方法如下，首先定义一个容器，为该容器取一个唯一标识，下面的js将会用此标识唯一定位此容器-->
+        <div class="mytest">
+
+        </div>
+
+
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/lybfenye.js"></script>
+        <script>
+            $(function() {
+                var testobj = { //定义一个testobj（名字可以自定义）对象
+                    nowpage: 3, //当前页
+                    allpage: 20, //总页数
+                    rongqiclass: ".mytest" //容器,写选择器，写成id选择器也可以
+                }
+
+                lybpage(testobj);
+                //为下一页绑定事件
+                $(testobj.rongqiclass).delegate('.lybdown', 'click', function() {
+                    alert("下一页");
+                })
+                //为上一页绑定事件
+                $(testobj.rongqiclass).delegate('.lybup', 'click', function() {
+                    alert("上一页");
+                })
+                //为带有数字翻页的按钮绑定事件
+                $(testobj.rongqiclass).delegate('.pagenum', 'click', function() {
+                    alert("到第" + $(this).html() + "页");
+                })
+
+                ;
+
+            })
+
+        </script>
+    </div>
+</body>
+
+</html>
